@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario sobre Periféricos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .periferico {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .periferico img {
+            width: 200px;
+            height: auto;
+        }
+        .periferico p {
+            font-size: 14px;
+            color: #333;
+        }
+        .question {
+            margin: 20px 0;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .submit-btn {
+            display: block;
+            margin: 30px auto;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .result {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cuestionario sobre Periféricos</h1>
+
+    <!-- Imágenes y explicaciones de los periféricos -->
+    <div class="periferico">
+        <img src="teclado.jpg" alt="Teclado">
+        <p>Teclado: Un dispositivo de entrada utilizado para introducir datos en una computadora.</p>
+    </div>
+    <div class="periferico">
+        <img src="monitor.jpg" alt="Monitor">
+        <p>Monitor: Un periférico de salida que muestra información visual generada por la computadora.</p>
+    </div>
+    <div class="periferico">
+        <img src="escaner.jpg" alt="Escáner">
+        <p>Escáner: Un periférico de entrada que digitaliza imágenes y documentos en formato físico.</p>
+    </div>
+    <div class="periferico">
+        <img src="raton.jpg" alt="Ratón">
+        <p>Ratón: Un dispositivo de entrada que permite al usuario interactuar con la computadora de forma gráfica.</p>
+    </div>
+
+    <!-- Cuestionario -->
+    <form id="cuestionario">
+        <div class="question">
+            <h3>1. Un teclado es un periférico de entrada.</h3>
+            <label>
+                <input type="radio" name="q1" value="verdadero"> Verdadero
+            </label>
+            <label>
+                <input type="radio" name="q1" value="falso"> Falso
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>2. Un monitor es un periférico de salida.</h3>
+            <label>
+                <input type="radio" name="q2" value="verdadero"> Verdadero
+            </label>
+            <label>
+                <input type="radio" name="q2" value="falso"> Falso
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>3. Un escáner es un periférico de salida.</h3>
+            <label>
+                <input type="radio" name="q3" value="verdadero"> Verdadero
+            </label>
+            <label>
+                <input type="radio" name="q3" value="falso"> Falso
+            </label>
+        </div>
+
+        <div class="question">
+            <h3>4. Un ratón es un periférico de entrada.</h3>
+            <label>
+                <input type="radio" name="q4" value="verdadero"> Verdadero
+            </label>
+            <label>
+                <input type="radio" name="q4" value="falso"> Falso
+            </label>
+        </div>
+
+        <button type="button" class="submit-btn" onclick="verificarRespuestas()">Enviar respuestas</button>
+    </form>
+
+    <div id="resultados" class="result"></div>
+
+    <script>
+        function verificarRespuestas() {
+            // Respuestas correctas
+            const respuestasCorrectas = {
+                q1: 'verdadero',
+                q2: 'verdadero',
+                q3: 'falso',
+                q4: 'verdadero'
+            };
+
+            // Obtener las respuestas seleccionadas
+            const formulario = document.getElementById('cuestionario');
+            const resultados = document.getElementById('resultados');
+            let salidaResultados = '';
+
+            for (let i = 1; i <= 4; i++) {
+                const pregunta = formulario['q' + i];
+                let respuestaSeleccionada = '';
+                
+                for (let j = 0; j < pregunta.length; j++) {
+                    if (pregunta[j].checked) {
+                        respuestaSeleccionada = pregunta[j].value;
+                    }
+                }
+
+                // Verificar la respuesta
+                if (respuestaSeleccionada === respuestasCorrectas['q' + i]) {
+                    salidaResultados += `<p class="correct">Pregunta ${i}: Correcto</p>`;
+                } else {
+                    salidaResultados += `<p class="incorrect">Pregunta ${i}: Incorrecto</p>`;
+                }
+            }
+
+            // Mostrar resultados
+            resultados.innerHTML = salidaResultados;
+        }
+    </script>
+</body>
+</html>
